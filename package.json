@@ -9,6 +9,8 @@
   },
   "devDependencies": {
     "@httpx/exception": "^3.0.15",
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^24.5.2",
     "vite": "^6.3.6",
     "vitest": "^3.2.4",
     "zod": "^3.25.76"

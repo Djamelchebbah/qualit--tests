@@ -1,0 +1,23 @@
+# .gitlab-ci.yml
+stages:
+  - validate
+  - test
+  - build
+  - release
+  - deploy
+
+install:
+  stage: .pre
+  script:
+    - npm ci --cache .npm --prefer-offline
+
+validate:
+  stage: validate
+  script:
+    - npm run lint # Remplace par ta commande de linting si configurée
+
+test:
+  stage: test
+  script:
+    - npx vitest run --coverage
+    - npx playwright test
