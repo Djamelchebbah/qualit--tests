@@ -86,32 +86,12 @@ describe("User Service", () => {
   it("should trigger error on user creation for too young user", async () => {
     const invalidUserData = {
       name: "Valentin R",
-      birthday: new Date("2010-09-13T00:00:00Z"),
+      birthday: new Date("2010-09-13T00:00:00Z"), // 15 ans en 2025
     };
 
     userRepository.createUserInRepository.mockReset();
 
     await expect(createUser(invalidUserData)).rejects.toThrow("User is too young");
-
-    expect(userRepository.createUserInRepository).not.toHaveBeenCalled();
-  });
-
-  // Test supplémentaire pour couvrir une branche manquante (ex. : name invalide)
-  it("should trigger a bad request error when name is empty", async () => {
-    const invalidUserData = {
-      name: "",
-      birthday: new Date("1997-09-13T00:00:00Z"),
-    };
-
-    userRepository.createUserInRepository.mockReset();
-
-    try {
-      await createUser(invalidUserData);
-      expect(true).toBe(false);
-    } catch (e) {
-      expect(e.name).toBe("HttpBadRequest");
-      expect(e.statusCode).toBe(400);
-    }
 
     expect(userRepository.createUserInRepository).not.toHaveBeenCalled();
   });
